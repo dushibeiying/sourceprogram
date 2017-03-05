@@ -4,13 +4,13 @@ spring:
   application:
     name: platform-passport
   rabbitmq:
-    host: localhost
+    host: 192.168.1.101
     port: 5672
     username: guest
     password: guest
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/ft_passport
+    url: jdbc:mysql://192.168.1.101:3307/ft_passport
     username: ft_test
     password: ft_test
 mybatis:
