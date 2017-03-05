@@ -5,7 +5,7 @@ package xyz.ftuan.platform.passport.util;
  */
 public class TimeUtils {
 
-    public static int currentTimeSeconds(){
-        return (int)(System.currentTimeMillis() / 1000);
+    public static int currentTimeSeconds() {
+        return (int) (System.currentTimeMillis() / 1000);
     }
 }

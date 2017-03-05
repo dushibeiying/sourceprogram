@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class FilterConfiguration {
 
     @Bean
-    public RemoteIpFilter remoteIpFilter(){
+    public RemoteIpFilter remoteIpFilter() {
         return new RemoteIpFilter();
     }
 }

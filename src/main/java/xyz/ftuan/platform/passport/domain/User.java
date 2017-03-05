@@ -2,7 +2,7 @@ package xyz.ftuan.platform.passport.domain;
 
 public class User {
 
-    private Integer id;
+    private Long id;
 
     private String mobile;
 
@@ -14,11 +14,11 @@ public class User {
 
     private Integer deleteTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

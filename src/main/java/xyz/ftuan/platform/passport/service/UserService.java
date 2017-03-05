@@ -2,6 +2,7 @@ package xyz.ftuan.platform.passport.service;
 
 import xyz.ftuan.platform.passport.domain.User;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
+import xyz.ftuan.platform.passport.model.UserProfile;
 
 /**
  * Created by LUOXC on 2017/2/26.
@@ -9,5 +10,5 @@ import xyz.ftuan.platform.passport.model.RegisterRequest;
 public interface UserService {
     void register(RegisterRequest request);
 
-    User findUserById(Long id);
+    UserProfile findUserById(Long id);
 }

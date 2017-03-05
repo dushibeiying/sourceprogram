@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PlatformPassportApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PlatformPassportApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PlatformPassportApplication.class, args);
+    }
 }

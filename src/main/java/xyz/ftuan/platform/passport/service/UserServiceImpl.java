@@ -1,10 +1,12 @@
 package xyz.ftuan.platform.passport.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.ftuan.platform.passport.domain.User;
 import xyz.ftuan.platform.passport.domain.UserMapper;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
+import xyz.ftuan.platform.passport.model.UserProfile;
 import xyz.ftuan.platform.passport.util.TimeUtils;
 
 /**
@@ -26,7 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(Long id) {
-        return userMapper.selectById(id);
+    public UserProfile findUserById(Long id) {
+        User user = userMapper.selectById(id);
+        return UserProfile.newUserProfile(user);
     }
 }

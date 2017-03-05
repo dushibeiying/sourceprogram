@@ -10,7 +10,7 @@ public class RegisterRequest {
     private String mobile;
     private String password;
 
-    public String getMD5Password(){
+    public String getMD5Password() {
         return MD5Utils.encode(password);
     }
 
