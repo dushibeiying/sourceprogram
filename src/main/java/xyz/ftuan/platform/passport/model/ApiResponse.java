@@ -53,45 +53,22 @@ public class ApiResponse {
             apiResponse = new ApiResponse();
         }
 
-        /**
-         * 设置错误码。默认200
-         *
-         * @param code 错误码
-         * @return ApiResponseBuilder
-         */
         public ApiResponseBuilder code(int code) {
             apiResponse.code = code;
             return this;
         }
 
-        /**
-         * 设置消息。默认[操作成功]
-         *
-         * @param message 错误消息
-         * @return ApiResponseBuilder
-         */
         public ApiResponseBuilder message(String message) {
             apiResponse.message = message;
             return this;
         }
 
 
-        /**
-         * 设置响应的具体内容
-         *
-         * @param data 响应的具体内容
-         * @return 内容
-         */
         public ApiResponseBuilder data(Object data) {
             apiResponse.data = data;
             return this;
         }
 
-        /**
-         * 构造响应
-         *
-         * @return 响应
-         */
         public ApiResponse build() {
             if(apiResponse.data != null){
                 apiResponse.sign = MD5Utils.encode(JSON.toJSONString(apiResponse));
