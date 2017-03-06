@@ -23,12 +23,8 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="xyz.ftuan.platform.passport.domain.User">
-        insert into user (id, mobile, password,
-        create_time, update_time, delete_time
-        )
-        values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-        #{createTime,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, #{deleteTime,jdbcType=INTEGER}
-        )
+        insert into user (id, mobile, password, create_time)
+        values (#{id,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="xyz.ftuan.platform.passport.domain.User">
         insert into user
