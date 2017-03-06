@@ -1,8 +1,7 @@
-package xyz.ftuan.platform.passport.web;
+package xyz.ftuan.platform.passport.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xyz.ftuan.platform.passport.domain.User;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
 import xyz.ftuan.platform.passport.model.UserProfile;
 import xyz.ftuan.platform.passport.service.UserService;
