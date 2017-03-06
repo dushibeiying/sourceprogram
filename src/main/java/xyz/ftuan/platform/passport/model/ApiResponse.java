@@ -70,9 +70,7 @@ public class ApiResponse {
         }
 
         public ApiResponse build() {
-            if(apiResponse.data != null){
-                apiResponse.sign = MD5Utils.encode(JSON.toJSONString(apiResponse));
-            }
+            apiResponse.sign = MD5Utils.encode(JSON.toJSONString(apiResponse));
             return apiResponse;
         }
 

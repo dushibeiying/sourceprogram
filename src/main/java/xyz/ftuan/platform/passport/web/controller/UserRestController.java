@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.ftuan.platform.passport.model.ApiResponse;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
+import xyz.ftuan.platform.passport.model.UserProfile;
 import xyz.ftuan.platform.passport.service.UserService;
 
 /**
@@ -23,7 +24,8 @@ public class UserRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ApiResponse findUserById(@PathVariable Long id) {
-        return new ApiResponse.ApiResponseBuilder().data(userService.findUserById(id)).build();
+        UserProfile userProfile = userService.findUserById(id);
+        return new ApiResponse.ApiResponseBuilder().data(userProfile).build();
     }
 
 }
