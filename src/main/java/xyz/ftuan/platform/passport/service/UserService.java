@@ -1,6 +1,5 @@
 package xyz.ftuan.platform.passport.service;
 
-import xyz.ftuan.platform.passport.domain.User;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
 import xyz.ftuan.platform.passport.model.UserProfile;
 
