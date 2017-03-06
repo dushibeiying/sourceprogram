@@ -1,6 +1,5 @@
 package xyz.ftuan.platform.passport.service;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.ftuan.platform.passport.domain.User;
