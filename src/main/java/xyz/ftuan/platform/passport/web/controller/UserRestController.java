@@ -2,8 +2,8 @@ package xyz.ftuan.platform.passport.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import xyz.ftuan.platform.passport.model.ApiResponse;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
-import xyz.ftuan.platform.passport.model.UserProfile;
 import xyz.ftuan.platform.passport.service.UserService;
 
 /**
@@ -16,13 +16,14 @@ public class UserRestController {
     private UserService userService;
 
     @RequestMapping("/register")
-    public void register(@RequestBody RegisterRequest request) {
+    public ApiResponse register(@RequestBody RegisterRequest request) {
         userService.register(request);
+        return ApiResponse.SUCCESS;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public UserProfile findUserById(@PathVariable Long id) {
-        return userService.findUserById(id);
+    public ApiResponse findUserById(@PathVariable Long id) {
+        return new ApiResponse.ApiResponseBuilder().data(userService.findUserById(id)).build();
     }
 
 }
