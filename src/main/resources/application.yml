@@ -10,9 +10,9 @@ spring:
     password: guest
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.1.101:3307/ft_passport
-    username: ft_test
-    password: ft_test
+    url: jdbc:mysql://localhost:3306/ft_passport
+    username: root
+    password: 110007
 mybatis:
   config-locations: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
