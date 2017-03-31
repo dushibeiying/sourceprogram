@@ -22,4 +22,4 @@ mybatis:
     default-statement-timeout: 30
 logging:
   level:
-    root: DEBUG
+    root: INFO

@@ -33,6 +33,16 @@ public class UserRestController {
     	}
     }
 
+    @RequestMapping("/login")
+    public ApiResponse login(@RequestBody RegisterRequest request) {    	
+    	try{
+	        userService.login(request);
+	        return ApiResponse.SUCCESS;
+    	}catch(ServiceException e){
+    		return new ApiResponseBuilder().code(e.getStatus()).message(e.getMessage()).build();
+    	}	   
+    }
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ApiResponse findUserById(@PathVariable Long id) {
         UserProfile userProfile = userService.findUserById(id);

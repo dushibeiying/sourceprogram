@@ -9,5 +9,7 @@ import xyz.ftuan.platform.passport.model.UserProfile;
 public interface UserService {
     void register(RegisterRequest request);
 
+    void login(RegisterRequest request);
+    
     UserProfile findUserById(Long id);
 }
