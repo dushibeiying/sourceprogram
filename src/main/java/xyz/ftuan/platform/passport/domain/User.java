@@ -7,6 +7,8 @@ public class User {
     private String mobile;
 
     private String password;
+    
+    private String nickname;
 
     private Integer createTime;
 
@@ -38,6 +40,14 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
+    public String getNickname(){
+    	return nickname;
+    }
+    
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
     public Integer getCreateTime() {
         return createTime;
     }
@@ -61,5 +71,4 @@ public class User {
     public void setDeleteTime(Integer deleteTime) {
         this.deleteTime = deleteTime;
     }
-
 }

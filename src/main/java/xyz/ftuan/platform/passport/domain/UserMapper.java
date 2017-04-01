@@ -23,4 +23,6 @@ public interface UserMapper {
 
     User selectByMobile(@Param("mobile") String mobile);
 
+    User selectByNickname(@Param("nickname") Long nickname);
+
 }

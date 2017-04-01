@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
 		User user = new User();
 		user.setMobile(request.getMobile());
 		user.setPassword(request.getMD5Password());
+		user.setNickname(request.getNickname());
 		user.setCreateTime(TimeUtils.currentTimeSeconds());
 		userMapper.insert(user);
 		logger.info( "register success, the mobile is {}.", request.getMobile());

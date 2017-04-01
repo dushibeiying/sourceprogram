@@ -9,6 +9,7 @@ public class RegisterRequest {
 
     private String mobile;
     private String password;
+    private String nickname;
 
     public String getMD5Password() {
         return MD5Utils.encode(password);
@@ -30,4 +31,11 @@ public class RegisterRequest {
         this.password = password;
     }
 
+    public String getNickname(){
+    	return nickname;
+    }
+    
+    public void setNickname(String nickname){
+    	this.nickname = nickname;
+    }
 }

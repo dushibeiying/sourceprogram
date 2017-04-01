@@ -11,6 +11,7 @@ public class UserProfile {
 
     private Long id;
     private String mobile;
+    private String nickname;
     private Integer createTime;
 
     public static UserProfile newUserProfile(User user) {
@@ -20,6 +21,7 @@ public class UserProfile {
         UserProfile userProfile = new UserProfile();
         userProfile.id = user.getId();
         userProfile.mobile = user.getMobile();
+        userProfile.nickname = user.getNickname();
         userProfile.createTime = user.getCreateTime();
         return userProfile;
     }
@@ -40,7 +42,15 @@ public class UserProfile {
         this.mobile = mobile;
     }
 
-    public Integer getCreateTime() {
+    public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public Integer getCreateTime() {
         return createTime;
     }
 
