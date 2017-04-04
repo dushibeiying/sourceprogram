@@ -69,9 +69,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void changePassword(ChangePasswordRepuest request){
-		// 1 验证帐号是否存在
-		// 2验证密码是否正确
-		// 3修改mi
+		// 验证请求参数
+		validateRequest(request);
+		// 获取要修改的用户信息
+		User user = userMapper.selectByMobile(request.getMobile());
+		// 验证用户密码是否可以被修改
+		if (Objects.isNull(user)) {
+			logger.info( "change password fail, the account is not exist of the mobile {}.", request.getMobile());
+			throw new ServiceException(10000, "account or password error");
+		}
+		if (!Objects.equals(user.getPassword(), request.getMD5Password())) {
+			logger.info( "change password fail, the password is wrong of the user {}.", request.getMobile());
+			throw new ServiceException(10000, "account or password error");
+		}
+		// 更新密码
+		user.setPassword(request.getMD5NewPassword());
+		user.setUpdateTime(TimeUtils.currentTimeSeconds());
+		userMapper.updateByPrimaryKey(user);		
+		logger.info("change password success of the user {}.", request.getMobile());
+	}
+
+	private void validateRequest(ChangePasswordRepuest request) {
 		if (StringUtils.isEmpty(request.getMobile())) {
 			throw new ServiceException(10001, "mobile is empty.");
 		}
@@ -81,19 +99,6 @@ public class UserServiceImpl implements UserService {
 		if(StringUtils.isEmpty(request.getNewPassword())){
 			throw new ServiceException(10002, "please input the new password.");
 		}
-		User user = userMapper.selectByMobile(request.getMobile());
-		if (Objects.isNull(user)) {
-			logger.info( "change password fail, the account is not exist of the mobile {}.", request.getMobile());
-			throw new ServiceException(10000, "account or password error");
-		}
-		if (!Objects.equals(user.getPassword(), request.getMD5Password())) {
-			logger.info( "change password fail, the password is wrong of the user {}.", request.getMobile());
-			throw new ServiceException(10000, "account or password error");
-		}
-		user.setPassword(request.getMD5NewPassword());
-		user.setUpdateTime(TimeUtils.currentTimeSeconds());
-		userMapper.updateByPrimaryKey(user);		
-		logger.info("change password success of the user {}.", request.getMobile());
 	}
 	@Override
 	public UserProfile findUserById(Long id) {

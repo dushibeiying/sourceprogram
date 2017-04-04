@@ -11,8 +11,16 @@ import xyz.ftuan.platform.passport.model.UserProfile;
 public interface UserService {
     void register(RegisterRequest request);
 
+    /**
+     * 登录
+     * @param request
+     */
     void login(LoginRequest request);
     
+    /**
+     * 修改密码
+     * @param request
+     */
     void changePassword(ChangePasswordRepuest request);
     
     UserProfile findUserById(Long id);
