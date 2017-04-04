@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import xyz.ftuan.platform.passport.domain.User;
 import xyz.ftuan.platform.passport.domain.UserMapper;
 import xyz.ftuan.platform.passport.exception.ServiceException;
+import xyz.ftuan.platform.passport.model.ChangePasswordRepuest;
+import xyz.ftuan.platform.passport.model.LoginRequest;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
 import xyz.ftuan.platform.passport.model.UserProfile;
 import xyz.ftuan.platform.passport.util.TimeUtils;
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	public void login(RegisterRequest request) {
+	public void login(LoginRequest request) {
 		if (StringUtils.isEmpty(request.getMobile())) {
 			throw new ServiceException(10001, "mobile is empty.");
 		}
@@ -66,6 +68,33 @@ public class UserServiceImpl implements UserService {
 		logger.info("login success of the user {}.", request.getMobile());
 	}
 
+	public void changePassword(ChangePasswordRepuest request){
+		// 1 验证帐号是否存在
+		// 2验证密码是否正确
+		// 3修改mi
+		if (StringUtils.isEmpty(request.getMobile())) {
+			throw new ServiceException(10001, "mobile is empty.");
+		}
+		if(StringUtils.isEmpty(request.getPassword())){
+			throw new ServiceException(10002, "please input old password.");
+		}
+		if(StringUtils.isEmpty(request.getNewPassword())){
+			throw new ServiceException(10002, "please input the new password.");
+		}
+		User user = userMapper.selectByMobile(request.getMobile());
+		if (Objects.isNull(user)) {
+			logger.info( "change password fail, the account is not exist of the mobile {}.", request.getMobile());
+			throw new ServiceException(10000, "account or password error");
+		}
+		if (!Objects.equals(user.getPassword(), request.getMD5Password())) {
+			logger.info( "change password fail, the password is wrong of the user {}.", request.getMobile());
+			throw new ServiceException(10000, "account or password error");
+		}
+		user.setPassword(request.getMD5NewPassword());
+		user.setUpdateTime(TimeUtils.currentTimeSeconds());
+		userMapper.updateByPrimaryKey(user);		
+		logger.info("change password success of the user {}.", request.getMobile());
+	}
 	@Override
 	public UserProfile findUserById(Long id) {
 		User user = userMapper.selectById(id);
