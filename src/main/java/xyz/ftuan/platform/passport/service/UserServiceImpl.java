@@ -1,5 +1,6 @@
 package xyz.ftuan.platform.passport.service;
 
+import java.sql.ResultSet;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
@@ -104,5 +105,29 @@ public class UserServiceImpl implements UserService {
 	public UserProfile findUserById(Long id) {
 		User user = userMapper.selectById(id);
 		return UserProfile.newUserProfile(user);
+	}
+
+	@Override
+	public void queryUserBySurname(String request) {
+		ResultSet  result= userMapper.selectBySurname(request);
+        Workbook workbook = new Workbook();  
+		 //写入各条记录，每条记录对应Excel中的一行  
+        while(result.next())    {  
+            row= sheet.createRow((short)iRow);  
+            for(int j=1;j<=nColumn;j++) {  
+                cell = row.createCell(j-1);  
+                cell.setCellType(HSSFCell.CELL_TYPE_STRING);  
+                Object oj = result.getObject(j);  
+                  
+                if (oj == null ) {  
+                    oj = "";  
+                }  
+                  
+                cell.setCellValue(oj.toString());  
+            }  
+            iRow++;  
+        }  
+
+			
 	}
 }

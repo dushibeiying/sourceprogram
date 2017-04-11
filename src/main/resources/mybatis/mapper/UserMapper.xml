@@ -125,6 +125,13 @@
         where mobile = #{mobile,jdbcType=VARCHAR}
     </select>
     
+    <select id="selectBySurname" resultMap="BaseResultMap">
+        select
+        <include refid="create_time,nickname,mobile"/>
+        from user
+        where nickname like #{nickname,jdbcType=VARCHAR}
+    </select>
+    
     <select id="selectByNickname" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

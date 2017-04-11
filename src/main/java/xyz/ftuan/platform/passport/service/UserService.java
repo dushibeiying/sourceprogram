@@ -23,5 +23,7 @@ public interface UserService {
      */
     void changePassword(ChangePasswordRepuest request);
     
+    void queryUserBySurname(String request);
+    
     UserProfile findUserById(Long id);
 }

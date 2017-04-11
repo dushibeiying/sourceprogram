@@ -55,6 +55,16 @@ public class UserRestController {
     	}	   
     }
     
+    @RequestMapping("/surname")
+    public ApiResponse queryUserBySurname(@RequestBody String request) {    	
+    	try{
+	        userService.queryUserBySurname(request);
+	        return ApiResponse.SUCCESS;
+    	}catch(ServiceException e){
+    		return new ApiResponseBuilder().code(e.getStatus()).message(e.getMessage()).build();
+    	}	   
+    }
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ApiResponse findUserById(@PathVariable Long id) {
         UserProfile userProfile = userService.findUserById(id);

@@ -1,5 +1,7 @@
 package xyz.ftuan.platform.passport.domain;
 
+import java.sql.ResultSet;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,7 +24,9 @@ public interface UserMapper {
     User selectById(@Param("id") Long id);
 
     User selectByMobile(@Param("mobile") String mobile);
+    
+    ResultSet selectBySurname(@Param("nickname") String surname);
 
-    User selectByNickname(@Param("nickname") Long nickname);
+    User selectByNickname(@Param("nickname") String nickname);
 
 }
