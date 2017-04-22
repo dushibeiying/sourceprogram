@@ -9,6 +9,10 @@ public class LoginRequest {
 
     private String mobile;
     private String password;
+    
+    public LoginRequest(){
+        
+    }
 
     public LoginRequest(String mobile,String password){
     	this.mobile = mobile;

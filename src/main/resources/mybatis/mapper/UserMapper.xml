@@ -13,6 +13,9 @@
     <sql id="Base_Column_List">
         id, mobile, password,nickname, create_time, update_time, delete_time
     </sql>
+    <sql id="Surname">
+        create_time,nickname,mobile
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -124,14 +127,14 @@
         from user
         where mobile = #{mobile,jdbcType=VARCHAR}
     </select>
-    
+ 
     <select id="selectBySurname" resultMap="BaseResultMap">
         select
-        <include refid="create_time,nickname,mobile"/>
+        <include refid="Surname"/>
         from user
-        where nickname like #{nickname,jdbcType=VARCHAR}
+        where nickname like concat(#{nickname},'%')
     </select>
-    
+
     <select id="selectByNickname" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

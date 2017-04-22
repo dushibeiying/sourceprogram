@@ -1,10 +1,18 @@
 package xyz.ftuan.platform.passport.web.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import xyz.ftuan.platform.passport.exception.ServiceException;
@@ -36,7 +44,8 @@ public class UserRestController {
     }
 
     @RequestMapping("/login")
-    public ApiResponse login(@RequestBody LoginRequest request) {    	
+    public ApiResponse login(@RequestBody LoginRequest request) {
+     
     	try{
 	        userService.login(request);
 	        return ApiResponse.SUCCESS;
@@ -56,12 +65,16 @@ public class UserRestController {
     }
     
     @RequestMapping("/surname")
-    public ApiResponse queryUserBySurname(@RequestBody String request) {    	
+    public void queryUserBySurname(@RequestParam("q") String request, HttpServletResponse response) throws IOException {    	
     	try{
-	        userService.queryUserBySurname(request);
-	        return ApiResponse.SUCCESS;
+    	    byte[] out = userService.queryUserBySurname(request);
+    	    response.setContentType("application/vnd.ms-excel");  
+            response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode("users.xls", "utf-8"));  
+            OutputStream os = response.getOutputStream();  
+            os.write(out);
+            os.close();
     	}catch(ServiceException e){
-    		return new ApiResponseBuilder().code(e.getStatus()).message(e.getMessage()).build();
+    		
     	}	   
     }
     

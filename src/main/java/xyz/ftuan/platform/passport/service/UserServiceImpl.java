@@ -1,9 +1,24 @@
 package xyz.ftuan.platform.passport.service;
 
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.utils.DateUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,26 +123,42 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void queryUserBySurname(String request) {
-		ResultSet  result= userMapper.selectBySurname(request);
-        Workbook workbook = new Workbook();  
-		 //写入各条记录，每条记录对应Excel中的一行  
-        while(result.next())    {  
-            row= sheet.createRow((short)iRow);  
-            for(int j=1;j<=nColumn;j++) {  
-                cell = row.createCell(j-1);  
-                cell.setCellType(HSSFCell.CELL_TYPE_STRING);  
-                Object oj = result.getObject(j);  
-                  
-                if (oj == null ) {  
-                    oj = "";  
-                }  
-                  
-                cell.setCellValue(oj.toString());  
-            }  
-            iRow++;  
-        }  
-
+	public byte[] queryUserBySurname(String request) {
+		List<User>  users = userMapper.selectBySurname(request);
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet();
+	    int iRow = 0;
+	    writeRow(sheet, iRow++, "注册时间","昵称","手机号码");
+        for(User user : users) {
+            writeRow(sheet, iRow++, DateUtils.formatDate(new Date(user.getCreateTime().longValue() * 1000),"yyyy/M/d"),user.getNickname(),user.getMobile());
+        }
+        ByteArrayOutputStream fileOut = new ByteArrayOutputStream();
+        try {
+            workbook.write(fileOut);  
+            return fileOut.toByteArray();
+        } catch (Exception e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+            return new byte[0];
+        }  finally{
+            try {
+                workbook.close();
+                fileOut.close();
+            } catch (IOException e) {
+                // TODO 自动生成的 catch 块
+                e.printStackTrace();
+            }
+        }
 			
 	}
+
+    private void writeRow(HSSFSheet sheet, int iRow, String regTime,String name,String mobile) {
+        HSSFRow row= sheet.createRow(iRow);  
+        HSSFCell cell = row.createCell(0);  
+        cell.setCellValue(regTime);
+        cell = row.createCell(1);  
+        cell.setCellValue(name);
+        cell = row.createCell(2);  
+        cell.setCellValue(mobile);
+    }
 }

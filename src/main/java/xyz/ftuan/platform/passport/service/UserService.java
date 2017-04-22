@@ -22,8 +22,8 @@ public interface UserService {
      * @param request
      */
     void changePassword(ChangePasswordRepuest request);
-    
-    void queryUserBySurname(String request);
+        
+    byte[] queryUserBySurname(String request);
     
     UserProfile findUserById(Long id);
 }
