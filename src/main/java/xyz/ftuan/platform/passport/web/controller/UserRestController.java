@@ -2,7 +2,6 @@ package xyz.ftuan.platform.passport.web.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.ftuan.platform.passport.exception.ServiceException;
 import xyz.ftuan.platform.passport.model.ApiResponse;
 import xyz.ftuan.platform.passport.model.ApiResponse.ApiResponseBuilder;
-import xyz.ftuan.platform.passport.model.ChangePasswordRepuest;
+import xyz.ftuan.platform.passport.model.ChangePasswordRequest;
 import xyz.ftuan.platform.passport.model.LoginRequest;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
 import xyz.ftuan.platform.passport.model.UserProfile;
@@ -55,7 +54,7 @@ public class UserRestController {
     }
     
     @RequestMapping("/changepassword")
-    public ApiResponse changepassword(@RequestBody ChangePasswordRepuest request) {    	
+    public ApiResponse changepassword(@RequestBody ChangePasswordRequest request) {    	
     	try{
 	        userService.changePassword(request);
 	        return ApiResponse.SUCCESS;

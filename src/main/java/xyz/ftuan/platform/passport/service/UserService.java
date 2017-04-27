@@ -1,6 +1,6 @@
 package xyz.ftuan.platform.passport.service;
 
-import xyz.ftuan.platform.passport.model.ChangePasswordRepuest;
+import xyz.ftuan.platform.passport.model.ChangePasswordRequest;
 import xyz.ftuan.platform.passport.model.LoginRequest;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
 import xyz.ftuan.platform.passport.model.UserProfile;
@@ -21,7 +21,7 @@ public interface UserService {
      * 修改密码
      * @param request
      */
-    void changePassword(ChangePasswordRepuest request);
+    void changePassword(ChangePasswordRequest request);
         
     byte[] queryUserBySurname(String request);
     

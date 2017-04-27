@@ -2,12 +2,7 @@ package xyz.ftuan.platform.passport.service;
 
 
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +22,7 @@ import org.springframework.stereotype.Service;
 import xyz.ftuan.platform.passport.domain.User;
 import xyz.ftuan.platform.passport.domain.UserMapper;
 import xyz.ftuan.platform.passport.exception.ServiceException;
-import xyz.ftuan.platform.passport.model.ChangePasswordRepuest;
+import xyz.ftuan.platform.passport.model.ChangePasswordRequest;
 import xyz.ftuan.platform.passport.model.LoginRequest;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
 import xyz.ftuan.platform.passport.model.UserProfile;
@@ -84,7 +79,7 @@ public class UserServiceImpl implements UserService {
 		logger.info("login success of the user {}.", request.getMobile());
 	}
 
-	public void changePassword(ChangePasswordRepuest request){
+	public void changePassword(ChangePasswordRequest request){
 		// 验证请求参数
 		validateRequest(request);
 		// 获取要修改的用户信息
@@ -105,7 +100,7 @@ public class UserServiceImpl implements UserService {
 		logger.info("change password success of the user {}.", request.getMobile());
 	}
 
-	private void validateRequest(ChangePasswordRepuest request) {
+	private void validateRequest(ChangePasswordRequest request) {
 		if (StringUtils.isEmpty(request.getMobile())) {
 			throw new ServiceException(10001, "mobile is empty.");
 		}
