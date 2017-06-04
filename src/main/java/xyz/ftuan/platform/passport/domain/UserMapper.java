@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
+    void batchDeleteEmps(int[] id);
+    
+    List<User> selectByIds(int[] id);
+    
     int insert(User record);
 
     int insertSelective(User record);
@@ -27,5 +31,6 @@ public interface UserMapper {
     List<User> selectBySurname(@Param("nickname") String surname);
 
     User selectByNickname(@Param("nickname") String nickname);
-
+    
+    List<User> selectAll();
 }

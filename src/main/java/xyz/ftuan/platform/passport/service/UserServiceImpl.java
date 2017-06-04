@@ -3,9 +3,11 @@ package xyz.ftuan.platform.passport.service;
 
 
 import java.io.IOException;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.DateUtils;
@@ -155,5 +157,53 @@ public class UserServiceImpl implements UserService {
         cell.setCellValue(name);
         cell = row.createCell(2);  
         cell.setCellValue(mobile);
+    }
+
+    @Override
+    public List<UserProfile> findAllUser() {
+        List<User> users = userMapper.selectAll();
+        return users.stream().map(UserProfile::newUserProfile).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteById(int[] ids) {
+        logger.info( "change password fail, the password is wrong of the us");    
+        userMapper.batchDeleteEmps(ids)  ;     
+        logger.info( "change password fail, the password is wrong of the us");
+    }
+    
+
+    
+    @Override
+    public byte[] exportById(int[] ids) {              
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet();
+        int iRow = 0;
+        writeRow(sheet, iRow++, "注册时间","昵称","手机号码");
+        
+            List<User> user = userMapper.selectByIds(ids);
+            for(User u : user) {
+            if(Objects.isNull(u)) {
+                continue;
+            }
+            writeRow(sheet, iRow++, DateUtils.formatDate(new Date(u.getCreateTime().longValue() * 1000),"yyyy/M/d"),u.getNickname(),u.getMobile());
+            }
+        ByteArrayOutputStream fileOut = new ByteArrayOutputStream();
+        try {
+            workbook.write(fileOut);  
+            return fileOut.toByteArray();
+        } catch (Exception e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+            return new byte[0];
+        }  finally{
+            try {
+                workbook.close();
+                fileOut.close();
+            } catch (IOException e) {
+                // TODO 自动生成的 catch 块
+                e.printStackTrace();
+            }
+        }
     }
 }

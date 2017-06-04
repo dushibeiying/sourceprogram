@@ -13,9 +13,6 @@
     <sql id="Base_Column_List">
         id, mobile, password,nickname, create_time, update_time, delete_time
     </sql>
-    <sql id="Surname">
-        create_time,nickname,mobile
-    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -103,6 +100,21 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+    
+        <!-- 批量删除员工信息 -->
+    <delete id="batchDeleteEmps" parameterType="int">
+        delete from user where id in
+        <foreach item="empnoItem" collection="array" open="(" separator="," close=")">
+            #{empnoItem}
+        </foreach>
+    </delete>
+    <select id="selectByIds" resultMap="BaseResultMap">
+	    select  <include refid="Base_Column_List"/>
+	    from user where id in 
+	     <foreach item="empnoItem" collection="array" open="(" separator="," close=")">
+	            #{empnoItem}
+	        </foreach>
+    </select>
     <update id="updateByPrimaryKey" parameterType="xyz.ftuan.platform.passport.domain.User">
         update user
         set mobile = #{mobile,jdbcType=VARCHAR},
@@ -120,7 +132,7 @@
         from user
         where id = #{id,jdbcType=INTEGER}
     </select>
-
+    
     <select id="selectByMobile" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -130,7 +142,7 @@
  
     <select id="selectBySurname" resultMap="BaseResultMap">
         select
-        <include refid="Surname"/>
+        <include refid="Base_Column_List"/>
         from user
         where nickname like concat(#{nickname},'%')
     </select>
@@ -140,5 +152,11 @@
         <include refid="Base_Column_List"/>
         from user
         where nickname = #{nickname,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
     </select>
 </mapper>

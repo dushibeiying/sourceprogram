@@ -1,5 +1,6 @@
 package xyz.ftuan.platform.passport.service;
 
+import java.util.List;
 import xyz.ftuan.platform.passport.model.ChangePasswordRequest;
 import xyz.ftuan.platform.passport.model.LoginRequest;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
@@ -26,4 +27,11 @@ public interface UserService {
     byte[] queryUserBySurname(String request);
     
     UserProfile findUserById(Long id);
+    
+    void deleteById(int[] ids);
+    
+    List<UserProfile> findAllUser();
+
+    byte[] exportById(int[] ids);
+    
 }

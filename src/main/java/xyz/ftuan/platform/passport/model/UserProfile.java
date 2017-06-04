@@ -2,7 +2,12 @@ package xyz.ftuan.platform.passport.model;
 
 import xyz.ftuan.platform.passport.domain.User;
 
+import java.util.Date;
 import java.util.Objects;
+
+import org.apache.http.client.utils.DateUtils;
+
+
 
 /**
  * Created by LUOXC on 2017/3/5.
@@ -54,8 +59,12 @@ public class UserProfile {
         return createTime;
     }
 
-    public void setCreateTime(Integer createTime) {
+	public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
+    }
+	
+	public String getRegisterTime() {
+	    return DateUtils.formatDate(new Date(createTime.longValue() * 1000), "yyyy-MM-dd");
     }
 
 
