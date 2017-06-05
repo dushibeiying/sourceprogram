@@ -22,7 +22,6 @@ import xyz.ftuan.platform.passport.model.ChangePasswordRequest;
 import xyz.ftuan.platform.passport.model.LoginRequest;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
 import xyz.ftuan.platform.passport.model.UserProfile;
-import xyz.ftuan.platform.passport.service.BookService;
 import xyz.ftuan.platform.passport.service.UserService;
 
 /**
@@ -33,7 +32,6 @@ import xyz.ftuan.platform.passport.service.UserService;
 public class UserRestController {
     @Autowired
     private UserService userService;
-    private BookService bookService;
     
     @RequestMapping("/register")
     public ApiResponse register(@RequestBody RegisterRequest request) {

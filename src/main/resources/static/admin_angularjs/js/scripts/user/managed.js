@@ -19,7 +19,6 @@ var UserManaged = function () {
     var initEvents = function () {
     	$('#new_user_action').click(function(){
     		$('#users').empty();
-    		 
 		});   	
     	
     	$('#delete_user_action').click(function(){    		

@@ -9,7 +9,7 @@ import org.apache.http.client.utils.DateUtils;
 
 public class BookProfile {
 
-    private long id;
+    private Long id;
     private String name;
     private String isbn;   
     private String author;
