@@ -12,6 +12,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import xyz.ftuan.platform.passport.domain.Book;
 import xyz.ftuan.platform.passport.domain.BookMapper;
@@ -19,8 +21,10 @@ import xyz.ftuan.platform.passport.model.BookProfile;
 import xyz.ftuan.platform.passport.model.Request;
 import xyz.ftuan.platform.passport.util.TimeUtils;
 
+@Service
 public class BookServiceImp implements BookService {
     
+    @Autowired
     private BookMapper bookMapper;
     
     public void addBook(Request request) {

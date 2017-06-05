@@ -1,9 +1,6 @@
 package xyz.ftuan.platform.passport.service;
 
-
-
 import java.io.IOException;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -167,9 +164,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(int[] ids) {
-        logger.info( "change password fail, the password is wrong of the us");    
         userMapper.batchDeleteEmps(ids)  ;     
-        logger.info( "change password fail, the password is wrong of the us");
+        logger.info( "delete success.");
     }
     
 

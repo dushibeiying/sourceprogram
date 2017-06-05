@@ -512,7 +512,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({ 
                         name: 'MetronicApp',  
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        insertBefore: '#ng_load_plugins_before',
                         files: [                       
                             'js/scripts/book/managed.js'  
                         ]                    

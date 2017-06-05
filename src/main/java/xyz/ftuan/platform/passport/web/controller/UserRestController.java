@@ -17,12 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xyz.ftuan.platform.passport.exception.ServiceException;
 import xyz.ftuan.platform.passport.model.ApiResponse;
-import xyz.ftuan.platform.passport.model.BookProfile;
 import xyz.ftuan.platform.passport.model.ApiResponse.ApiResponseBuilder;
 import xyz.ftuan.platform.passport.model.ChangePasswordRequest;
 import xyz.ftuan.platform.passport.model.LoginRequest;
 import xyz.ftuan.platform.passport.model.RegisterRequest;
-import xyz.ftuan.platform.passport.model.Request;
 import xyz.ftuan.platform.passport.model.UserProfile;
 import xyz.ftuan.platform.passport.service.BookService;
 import xyz.ftuan.platform.passport.service.UserService;
@@ -36,7 +34,7 @@ public class UserRestController {
     @Autowired
     private UserService userService;
     private BookService bookService;
-
+    
     @RequestMapping("/register")
     public ApiResponse register(@RequestBody RegisterRequest request) {
     	try{
@@ -104,11 +102,6 @@ public class UserRestController {
         return new ApiResponse.ApiResponseBuilder().data(userService.findAllUser()).build();
     }
 
-    @RequestMapping(value = "/bookmanaged", method = RequestMethod.GET)
-    public ApiResponse findAllBook(){
-        return new ApiResponse.ApiResponseBuilder().data(bookService.findAllBook()).build();
-    }
-
     @RequestMapping(value = "/deleteById", method = RequestMethod.POST)
     public ApiResponse deleteById(@RequestBody int[] ids) {
         try{
@@ -123,47 +116,6 @@ public class UserRestController {
     public void exportById(@RequestParam("ids") int[] ids, HttpServletResponse response )throws IOException {
         try{
             byte[] out = userService.exportById(ids);
-            response.setContentType("application/vnd.ms-excel");  
-            response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode("users.xls", "utf-8"));  
-            OutputStream os = response.getOutputStream();  
-            os.write(out);
-            os.close();
-        }catch(ServiceException e){         
-        }      
-    }
-    
-    @RequestMapping("/addbook")
-    public ApiResponse addbook(@RequestBody Request request) {
-        try{
-            bookService.addBook(request);
-            return ApiResponse.SUCCESS;
-        }catch(ServiceException e){
-            return new ApiResponseBuilder().code(e.getStatus()).message(e.getMessage()).build();
-        }
-    }
-    
-    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
-    public ApiResponse findBookById(@PathVariable Long id) {
-        BookProfile bookProfile = bookService.findBookById(id);
-        return new ApiResponse.ApiResponseBuilder().data(bookProfile).build();
-    }
-    
-   
-
-    @RequestMapping(value = "/deleteById2", method = RequestMethod.POST)
-    public ApiResponse deleteById2(@RequestBody int[] ids) {
-        try{
-            bookService.deleteById(ids);
-            return ApiResponse.SUCCESS;
-        }catch(ServiceException e){
-            return new ApiResponseBuilder().code(e.getStatus()).message(e.getMessage()).build();
-        }
-    }
-    
-    @RequestMapping("/exportById2")
-    public void exportById2(@RequestParam("ids") int[] ids, HttpServletResponse response )throws IOException {
-        try{
-            byte[] out = bookService.exportById(ids);
             response.setContentType("application/vnd.ms-excel");  
             response.setHeader("Content-disposition", "attachment;filename="+ URLEncoder.encode("users.xls", "utf-8"));  
             OutputStream os = response.getOutputStream();  

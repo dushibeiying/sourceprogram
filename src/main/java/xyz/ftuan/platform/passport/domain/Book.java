@@ -1,7 +1,8 @@
 package xyz.ftuan.platform.passport.domain;
 
 public class Book {
-    private long id;
+    
+    private Long id;
 
     private String name;
 

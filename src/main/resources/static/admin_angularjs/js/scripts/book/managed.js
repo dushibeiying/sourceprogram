@@ -2,7 +2,7 @@ var BookManaged = function () {
 
     var initData = function () {
     	$('#books').empty();
-       $.get("http://localhost/rest/users/bookmanaged", function(response){
+       $.get("http://localhost/rest/books/managed", function(response){
     	   books = response.data;
     	   for(var i = 0; i< books.length; i++){
     		   var book = books[i];
@@ -31,7 +31,7 @@ var BookManaged = function () {
 	        }); 
 	    	$.ajax({
 	            type: "POST",
-	            url: "http://localhost:80/rest/users/deleteById2",
+	            url: "http://localhost:80/rest/users/deleteById",
 	            contentType: "application/json; charset=utf-8",
 	            data: JSON.stringify(bookIds),
 	            dataType: "json",
@@ -42,7 +42,7 @@ var BookManaged = function () {
     	});
     	
     	$('#export_action').click(function(){
-    		var url = "http://localhost:80/rest/users/exportById2?";
+    		var url = "http://localhost:80/rest/users/exportById?";
     		var hasId = false;
 	    	$(".bookIdCheckbox:checked").each(function() {
 	    		url += "ids=" + $(this).attr("data-bookId") + "&";
