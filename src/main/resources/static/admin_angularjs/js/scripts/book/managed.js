@@ -20,25 +20,26 @@ var BookManaged = function () {
     
     var initEvents = function () {
     	$('#add_book_action').click(function(){
-    		$('#books').empty();
-    		 
-		});   	
-    	
+    		$('#books').empty();   		 
+		});   		
     	$('#delete_book_action').click(function(){    		
-    		var bookIds = [];
+    		var bookIds = []; 
 	    	$(".bookIdCheckbox:checked").each(function() {
 	    		bookIds.push($(this).attr("data-bookId"));
-	        }); 
-	    	$.ajax({
-	            type: "POST",
-	            url: "http://localhost:80/rest/users/deleteById",
-	            contentType: "application/json; charset=utf-8",
-	            data: JSON.stringify(bookIds),
-	            dataType: "json",
-	            success: function (data) {	               
-	                	initData();	               
-	            },
-	        });
+	        });	    	
+	    	if(bookIds.length>0){
+	    		console.log(bookIds.length);
+		    	$.ajax({
+		            type: "POST",
+		            url: "http://localhost:80/rest/users/deleteById",
+		            contentType: "application/json; charset=utf-8",
+		            data: JSON.stringify(bookIds),
+		            dataType: "json",
+		            success: function (data) {	               
+		                	initData();	               
+		            },
+		        });
+	    	}
     	});
     	
     	$('#export_action').click(function(){

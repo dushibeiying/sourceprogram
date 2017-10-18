@@ -6,7 +6,7 @@
     <groupId>xyz.ftuan.platform</groupId>
     <artifactId>platform-passport</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>platform-passport</name>
     <description></description>
@@ -35,7 +35,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>              
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

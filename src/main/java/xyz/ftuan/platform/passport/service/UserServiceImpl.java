@@ -113,6 +113,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserProfile findUserById(Long id) {
 		User user = userMapper.selectById(id);
+		logger.info("findUserById of the user {}.",user);
 		return UserProfile.newUserProfile(user);
 	}
 
